@@ -41,14 +41,14 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "apps/engine:build"
+        "buildTarget": "engine:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "apps/engine:build:development"
+          "buildTarget": "engine:build:development"
         },
         "production": {
-          "buildTarget": "apps/engine:build:production"
+          "buildTarget": "engine:build:production"
         }
       }
     }
