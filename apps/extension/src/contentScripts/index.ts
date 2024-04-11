@@ -1,8 +1,3 @@
-
-declare  {
-
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Content script loaded.');
   console.log('Current URL:', window.location.href);
