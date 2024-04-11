@@ -2,7 +2,8 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
-import webExtension from 'vite-plugin-web-extension';
+import { crx } from '@crxjs/vite-plugin';
+import manifest from './public/manifest.json';
 
 export default defineConfig({
   root: __dirname,
@@ -18,14 +19,7 @@ export default defineConfig({
     host: 'localhost',
   },
 
-  plugins: [react(), nxViteTsPaths(),webExtension({
-    manifest: 'public/manifest.json',
-  })],
-
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [ nxViteTsPaths() ],
-  // },
+  plugins: [react(), nxViteTsPaths(), crx({ manifest })],
 
   build: {
     outDir: '../../dist/apps/extension',
@@ -35,11 +29,12 @@ export default defineConfig({
     },
     rollupOptions: {
       input: {
-        background: 'src/background.js',
-        contentScript: 'src/contentScript.js',
-        // Add other entries as needed
-      }
-    }
+        background: 'src/background/index.ts',
+        contentScript: 'src/contentScripts/index.ts',
+        popup: 'src/popup/index.tsx',
+        options: 'src/options/index.tsx',
+      },
+    },
   },
 
   test: {
