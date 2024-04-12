@@ -2,8 +2,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
-import { crx } from '@crxjs/vite-plugin';
-import manifest from './public/manifest.json';
 
 export default defineConfig({
   root: __dirname,
@@ -19,7 +17,7 @@ export default defineConfig({
     host: 'localhost',
   },
 
-  plugins: [react(), nxViteTsPaths(), crx({ manifest })],
+  plugins: [react(), nxViteTsPaths()],
 
   build: {
     outDir: '../../dist/apps/extension',
@@ -30,9 +28,14 @@ export default defineConfig({
     rollupOptions: {
       input: {
         background: 'src/background/index.ts',
-        contentScript: 'src/contentScripts/index.ts',
+        contentScript: 'src/contentScript/index.ts',
         popup: 'src/popup/index.tsx',
         options: 'src/options/index.tsx',
+      },
+      output: {
+        entryFileNames: `[name].js`, // Disables hashing for entry files
+        chunkFileNames: `[name].js`, // Disables hashing for chunks
+        assetFileNames: `[name].[ext]`, // Disables hashing for other assets like CSS
       },
     },
   },

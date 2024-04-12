@@ -8,7 +8,6 @@
   },
   "private": true,
   "devDependencies": {
-    "@crxjs/vite-plugin": "^1.0.14",
     "@emotion/babel-plugin": "11.11.0",
     "@nx/esbuild": "18.2.4",
     "@nx/eslint": "18.2.4",
