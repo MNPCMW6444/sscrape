@@ -1,13 +1,15 @@
-// src/contentScript/contentScript.ts
-console.log('This content script has loaded!');
-if (document.body) {
-  document.body.style.backgroundColor = 'lightblue';
-}
-
-// Listening for messages from the background script
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === 'changeColor') {
-    document.body.style.backgroundColor = request.color;
-    sendResponse({ status: 'Color changed' });
-  }
+// contentScript.js
+document.addEventListener('mouseover', function (e) {
+  // Highlight element logic here
 });
+
+document.addEventListener('click', function (e) {
+  e.preventDefault();
+  const selector = generateUniqueSelector(e.target);
+  chrome.runtime.sendMessage({ type: 'captureSelector', selector: selector });
+});
+
+export const generateUniqueSelector = (element) => {
+  // Generate and return a unique selector for 'element'
+  console.log(element);
+};

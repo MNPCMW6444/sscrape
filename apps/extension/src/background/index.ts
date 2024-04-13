@@ -1,10 +1,15 @@
-// src/background/index.ts
-chrome.runtime.onInstalled.addListener(() => {
-  console.log('Extension successfully installed!');
-  // Perform on install actions, like setting up initial storage values.
+// background.js
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.type === 'captureSelector') {
+    // Save the selector and associated rule details
+    saveRule(request.selector);
+  }
 });
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  console.log('Message received', message);
-  sendResponse({ reply: 'Message received' });
-});
+function checkRules() {
+  // Logic to fetch pages and check against saved rules
+}
+
+function saveRule(selector) {
+  // Save the selector and other details to chrome.storage
+}
